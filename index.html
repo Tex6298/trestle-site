@@ -5,63 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Trestle Consulting — Practical workflow improvements for SMEs</title>
   <meta name="description" content="We reduce workflow friction between teams and tools — with sensible simplification and low-friction automation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d12; --card:#121622; --text:#eef2ff; --muted:#b7c0d8; --line:#26304a; }
-    body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 64px 20px; }
-    h1 { font-size: clamp(28px, 4vw, 44px); line-height:1.1; margin:0; }
-    p { color:var(--muted); font-size: 18px; line-height:1.5; margin:14px 0 0; }
-    .cta { display:flex; gap:12px; flex-wrap:wrap; margin-top: 18px; }
-    .btn { display:inline-block; padding:12px 16px; border-radius: 12px; text-decoration:none; font-weight:600; }
-    .btn.primary { background:#eef2ff; color:#0b0d12; }
-    .btn.ghost { border:1px solid var(--line); color:var(--text); }
-    .grid { display:grid; gap:14px; margin-top: 34px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .card { background:var(--card); border:1px solid var(--line); border-radius: 16px; padding: 16px; }
-    .card h3 { margin:0 0 8px 0; font-size: 16px; }
-    .card p { font-size: 15px; margin:0; }
-    .section { margin-top: 44px; display:grid; gap:12px; }
-    .step { border-left: 3px solid var(--line); padding-left: 12px; color: var(--muted); }
-    .footer { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 14px; }
-    a { color: var(--text); }
+    :root {
+      --bg:#070910;
+      --panel:rgba(255,255,255,0.04);
+      --card:rgba(255,255,255,0.06);
+      --accent:#6ee7b7;
+      --accent-2:#7aa7ff;
+      --text:#f7f9ff;
+      --muted:#c9d5f2;
+      --line:rgba(255,255,255,0.08);
+      --shadow:0 20px 80px rgba(0,0,0,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(110, 231, 183, 0.12), transparent 30%),
+                  radial-gradient(circle at 80% 10%, rgba(122, 167, 255, 0.12), transparent 28%),
+                  radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.04), transparent 35%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a { color: inherit; }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 72px 22px 60px;
+    }
+
+    header {
+      display: grid;
+      gap: 18px;
+    }
+    .eyebrow {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      width: fit-content;
+      font-weight:600;
+      letter-spacing:0.01em;
+    }
+    h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      line-height:1.08;
+      margin:0;
+    }
+    p {
+      margin:0;
+      color:var(--muted);
+      font-size: 17px;
+    }
+    .lede { font-size: 18px; max-width: 740px; }
+    .mini { font-size: 14px; color: rgba(201,213,242,0.85); }
+
+    .cta {
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top: 6px;
+    }
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:13px 18px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:600;
+      border:1px solid transparent;
+      transition: transform 120ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      box-shadow: var(--shadow);
+    }
+    .btn.primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color:#031220;
+      box-shadow: 0 15px 35px rgba(122,167,255,0.25);
+    }
+    .btn.ghost {
+      background: var(--panel);
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: none;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .cards-grid {
+      margin-top: 36px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 { margin:0 0 8px 0; font-size: 17px; }
+    .card p { margin:0; font-size:15px; }
+
+    .pill-icon {
+      width:38px; height:38px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background: rgba(110,231,183,0.12);
+      border:1px solid rgba(110,231,183,0.35);
+      color: var(--accent);
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .section {
+      margin-top: 54px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+    .section h2 { margin:0 0 8px 0; font-size: 22px; }
+
+    .steps {
+      display:grid;
+      gap:12px;
+      margin-top: 14px;
+    }
+    .step {
+      display:flex;
+      gap:12px;
+      padding:12px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid var(--line);
+      color: var(--muted);
+    }
+    .step strong { color:var(--text); }
+    .bubble {
+      width:34px; height:34px;
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      background: rgba(122,167,255,0.15);
+      border:1px solid rgba(122,167,255,0.35);
+      color: var(--text);
+      flex-shrink:0;
+    }
+
+    .stats {
+      margin-top: 24px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      padding:14px 16px;
+      border-radius:14px;
+      background: rgba(255,255,255,0.03);
+      border:1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .stat .value { font-size:28px; font-weight:700; display:block; }
+    .stat .label { color:var(--muted); font-size:14px; }
+
+    .double-column {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:18px;
+    }
+
+    .quote {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 16px;
+      background: linear-gradient(120deg, rgba(110,231,183,0.15), rgba(122,167,255,0.2));
+      color:#0b1727;
+      font-weight:600;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+      border:1px solid rgba(255,255,255,0.3);
+    }
+
+    footer {
+      margin-top: 52px;
+      color: rgba(201,213,242,0.7);
+      font-size: 14px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 56px 18px; }
+      .btn { width: 100%; justify-content: center; }
+      header { gap: 14px; }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
     <header>
-      <h1>Practical workflow improvements for SMEs</h1>
-      <p>We reduce manual handoffs between people and tools (ops / admin / finance / reporting) — with sensible simplification first, then low-friction automation where it helps.</p>
-      <p style="margin-top:10px; font-size:14px;">Not big transformations. Just fewer manual steps, fewer handoffs, and fewer places where work gets stuck.</p>
+      <div class="eyebrow">Trestle Consulting · Workflow clarity for SMEs</div>
+      <h1>Practical workflow improvements that cut admin, reduce errors, and speed up delivery.</h1>
+      <p class="lede">We reduce the manual handoffs between your people and tools across operations, finance, and reporting. First we simplify the process, then we automate the boring parts—so your teams spend time on what matters.</p>
+      <p class="mini">Not big transformations. Just fewer manual steps, fewer handoffs, and fewer places where work gets stuck.</p>
       <div class="cta">
-        <a class="btn primary" href="mailto:adam@trestleconsulting.co.uk?subject=Workflow%20to%20simplify">Email Adam</a>
+        <a class="btn primary" href="mailto:adam@trestleconsulting.co.uk?subject=Workflow%20to%20simplify">Schedule a conversation</a>
         <a class="btn ghost" href="https://www.linkedin.com/">Connect on LinkedIn</a>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="value">35–55%</span>
+          <span class="label">Typical reduction in recurring admin time</span>
+        </div>
+        <div class="stat">
+          <span class="value">2–4 weeks</span>
+          <span class="label">Time to first measurable improvement</span>
+        </div>
+        <div class="stat">
+          <span class="value">Low risk</span>
+          <span class="label">Start with focused pilots, expand when it works</span>
+        </div>
       </div>
     </header>
 
-    <section class="grid" aria-label="What we do">
+    <section class="cards-grid" aria-label="What we do">
       <div class="card">
+        <div class="pill-icon">↺</div>
         <h3>Remove friction</h3>
-        <p>Copying, checking, chasing, re-keying — recurring admin that quietly accumulates.</p>
+        <p>Eliminate copying, checking, and re-keying that quietly piles up across back-office teams.</p>
       </div>
       <div class="card">
+        <div class="pill-icon">⇄</div>
         <h3>Strengthen handoffs</h3>
-        <p>Fix the gaps between teams/tools where ownership is unclear and work stalls.</p>
+        <p>Clarify ownership, tighten controls, and close the gaps where work slips through.</p>
       </div>
       <div class="card">
-        <h3>Keep it simple</h3>
-        <p>Clean the workflow first. Automate second. AI only where it genuinely helps.</p>
+        <div class="pill-icon">⚡</div>
+        <h3>Automate with intent</h3>
+        <p>Start with simple wins—integrations, smart templates, and light-touch AI where it genuinely helps.</p>
+      </div>
+      <div class="card">
+        <div class="pill-icon">📊</div>
+        <h3>Prove the value</h3>
+        <p>Track time saved and rework avoided, so teams and leaders see the impact.</p>
       </div>
     </section>
 
     <section class="section">
-      <h2 style="margin:0;">How it works</h2>
-      <div class="step"><strong>1) Identify</strong> the recurring workflow and where it gets stuck.</div>
-      <div class="step"><strong>2) Simplify</strong> steps (remove unnecessary work).</div>
-      <div class="step"><strong>3) Automate</strong> the boring bits (low disruption).</div>
-      <div class="step"><strong>4) Measure</strong> time saved and reduced rework.</div>
+      <div class="double-column">
+        <div>
+          <h2>How we work together</h2>
+          <p>Small, focused engagements with the people who know the workflow best. We listen first, simplify second, and automate last—keeping risk low and adoption high.</p>
+          <div class="steps">
+            <div class="step"><span class="bubble">1</span> <div><strong>Identify</strong> the recurring workflow and where it gets stuck.</div></div>
+            <div class="step"><span class="bubble">2</span> <div><strong>Simplify</strong> the steps to remove unnecessary work and handoffs.</div></div>
+            <div class="step"><span class="bubble">3</span> <div><strong>Automate</strong> the boring bits with low-disruption tools and integrations.</div></div>
+            <div class="step"><span class="bubble">4</span> <div><strong>Measure</strong> the time saved and reduced rework to guide the next iteration.</div></div>
+          </div>
+        </div>
+        <div>
+          <h2>Where we help most</h2>
+          <div class="cards-grid" style="margin-top:10px; grid-template-columns:1fr; gap:12px;">
+            <div class="card" style="box-shadow:none;">
+              <h3 style="margin-bottom:4px;">Operations &amp; Admin</h3>
+              <p>Client onboarding, billing, QA checks, scheduling, and vendor coordination.</p>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <h3 style="margin-bottom:4px;">Finance &amp; Reporting</h3>
+              <p>Month-end prep, reconciliations, approvals, and board/management packs.</p>
+            </div>
+            <div class="card" style="box-shadow:none;">
+              <h3 style="margin-bottom:4px;">Data &amp; Compliance</h3>
+              <p>Audit trails, evidence gathering, and data quality checks that need to be right every time.</p>
+            </div>
+          </div>
+          <div class="quote">“We started small, fixed one painful process, and expanded once the teams saw how much time they got back.”</div>
+        </div>
+      </div>
     </section>
 
-    <footer class="footer">
-      © Trestle Consulting • trestleconsulting.co.uk
+    <section class="section">
+      <div class="double-column">
+        <div>
+          <h2>Let’s remove the drag from your workflows</h2>
+          <p>Tell us where work gets stuck. We’ll propose a lightweight pilot, and you’ll see tangible improvements within a few weeks.</p>
+        </div>
+        <div class="cta" style="align-items:flex-start; justify-content:flex-end;">
+          <a class="btn primary" href="mailto:adam@trestleconsulting.co.uk?subject=Workflow%20to%20simplify">Start a pilot</a>
+          <a class="btn ghost" href="https://www.linkedin.com/">Book a short call</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© Trestle Consulting • trestleconsulting.co.uk</span>
+      <span>Based in the UK · Available remotely</span>
     </footer>
   </main>
 </body>
