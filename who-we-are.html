@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Who We Are | Trestle Consulting</title>
+  <meta name="description" content="Learn about Trestle Consulting's mission, values, and the people behind our work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:#c79a35;
+      --dark:#0f172a;
+      --text:#1f2937;
+      --muted:#4b5563;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --line:#e2e8f0;
+      --shadow:0 20px 60px rgba(15,23,42,0.16);
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a { color:inherit; text-decoration:none; }
+
+    .site-header {
+      background:rgba(11, 22, 41, 0.96);
+      border-bottom:1px solid rgba(248,250,252,0.08);
+    }
+    .nav-inner {
+      max-width:1120px;
+      margin:0 auto;
+      padding:16px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+    .brand {
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:#f8fafc;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .nav-links {
+      display:flex;
+      align-items:center;
+      gap:22px;
+      font-size:15px;
+      font-weight:500;
+      color:#e2e8f0;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .nav-links a { opacity:0.9; }
+    .nav-links a:hover { opacity:1; color:#fff; }
+    .nav-cta {
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(248,250,252,0.35);
+      color:#fff;
+      font-weight:600;
+      white-space:nowrap;
+      background:rgba(15, 23, 42, 0.4);
+    }
+
+    header.hero {
+      background:#0b1629;
+      color:#f8fafc;
+      padding:42px 24px 50px;
+    }
+    .hero-inner {
+      max-width:1120px;
+      margin:0 auto;
+    }
+    .hero-inner h1 {
+      font-size:clamp(32px, 4vw, 46px);
+      margin:0 0 10px;
+    }
+    .hero-inner p {
+      margin:0;
+      color:#e2e8f0;
+      font-size:18px;
+    }
+
+    main {
+      max-width:1120px;
+      margin:-30px auto 0;
+      padding:0 24px 80px;
+    }
+    section {
+      background:var(--card);
+      border-radius:16px;
+      padding:32px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--line);
+      margin-bottom:26px;
+    }
+    h2 { margin:0 0 12px; font-size:24px; }
+    .section-lede { margin:0 0 20px; color:var(--muted); }
+
+    .values {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:18px;
+    }
+    .value-card {
+      padding:18px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--bg);
+    }
+    .value-card h3 { margin:0 0 8px; font-size:18px; }
+    .value-card p { margin:0; color:var(--muted); }
+
+    .team {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+    }
+    .team-card {
+      padding:18px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:var(--bg);
+    }
+    .team-card h3 { margin:0 0 6px; font-size:18px; }
+    .team-card span { color:var(--muted); font-size:14px; }
+
+    .footer {
+      text-align:center;
+      color:var(--muted);
+      padding:16px 0 10px;
+      font-size:14px;
+    }
+
+    @media (max-width: 640px) {
+      header.hero { padding:32px 20px 42px; }
+      section { padding:24px; }
+      .nav-inner { padding:14px 18px; }
+      .nav-links { gap:14px; font-size:14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Trestle Consulting</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="who-we-are.html">Who We Are</a>
+        <a href="services.html">Services</a>
+        <a href="ai-audit.html">AI Audit</a>
+        <a href="research-program.html">Research Program</a>
+      </nav>
+      <a class="nav-cta" href="contact.html">Get a Demo</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Who We Are</h1>
+      <p>We are a strategy and delivery consultancy helping leaders align ambition with measurable outcomes.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Our story</h2>
+      <p class="section-lede">Trestle Consulting was built to bridge the gap between visionary ideas and the day-to-day work that delivers them.</p>
+      <p>We work with founders, executives, and mission-driven teams to clarify direction, strengthen operations, and deliver real momentum. Our approach blends strategic clarity with hands-on delivery, so leadership teams have a partner who stays with them from decision through execution.</p>
+    </section>
+
+    <section>
+      <h2>Values that guide our work</h2>
+      <div class="values">
+        <div class="value-card">
+          <h3>Practical ambition</h3>
+          <p>We focus on tangible outcomes and build plans that teams can execute week after week.</p>
+        </div>
+        <div class="value-card">
+          <h3>Integrity &amp; trust</h3>
+          <p>We tell the truth about what is working, what is not, and what it will take to improve.</p>
+        </div>
+        <div class="value-card">
+          <h3>Collaborative leadership</h3>
+          <p>We invest in the people doing the work, enabling teams to lead with confidence.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Leadership team</h2>
+      <p class="section-lede">We partner with a network of specialists, but our core team stays engaged throughout each project.</p>
+      <div class="team">
+        <div class="team-card">
+          <h3>Adam Porter</h3>
+          <span>Founder &amp; Managing Consultant</span>
+        </div>
+        <div class="team-card">
+          <h3>Research &amp; Intelligence Network</h3>
+          <span>Analysts, strategists, and delivery partners</span>
+        </div>
+        <div class="team-card">
+          <h3>Delivery Operations</h3>
+          <span>Programme managers and transformation leads</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">© 2024 Trestle Consulting. All rights reserved.</div>
+  </main>
+</body>
+</html>
